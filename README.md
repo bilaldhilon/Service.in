@@ -3,6 +3,8 @@ Service.in
 Service.in is a web platform that connects customers with verified service providers (e.g., plumbers, electricians, technicians) for household, office, and organizational maintenance tasks. It offers a seamless interface for browsing, booking, and reviewing services, ensuring reliability and trust.
 Table of Contents
 
+link:https://6000-firebase-studio-1747109980642.cluster-ys234awlzbhwoxmkkse6qo3fz6.cloudworkstations.dev/auth/forgot-password
+
 Features
 Tech Stack
 Installation
