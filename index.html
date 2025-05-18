@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service.in - Find Local Service Professionals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="/">Service.in</a>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/feedback">Feedback</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="/auth/customer-login" class="login-btn">Customer Login</a>
+        <a href="/auth/provider-login" class="signup-btn">Provider Login</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find Trusted Service Professionals</h1>
+      <p>Connect with verified plumbers, electricians, and more in your area</p>
+      <form id="searchForm" class="search-box">
+        <input type="text" id="searchInput" placeholder="What service do you need?">
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <h2>Our Services</h2>
+    <div class="service-grid" id="servicesGrid">
+      <!-- Services will be loaded dynamically -->
+      <div class="service-card">
+        <img src="/img/placeholder-plumbing.jpg" alt="Plumbing">
+        <h3>Plumbing</h3>
+        <p>Expert plumbing services for your home</p>
+        <a href="/services/plumbing" class="service-btn">Book Now</a>
+      </div>
+      <div class="service-card">
+        <img src="/img/placeholder-electrical.jpg" alt="Electrical">
+        <h3>Electrical</h3>
+        <p>Professional electrical repairs and installations</p>
+        <a href="/services/electrical" class="service-btn">Book Now</a>
+      </div>
+      <div class="service-card">
+        <img src="/img/placeholder-carpentry.jpg" alt="Carpentry">
+        <h3>Carpentry</h3>
+        <p>Quality carpentry and woodwork services</p>
+        <a href="/services/carpentry" class="service-btn">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Choose Service</h3>
+        <p>Select from our wide range of professional services</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Book Professional</h3>
+        <p>Select your preferred time and book instantly</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Get It Done</h3>
+        <p>Your service professional will arrive and complete the job</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>"Excellent service! The plumber was professional and fixed the issue quickly."</p>
+        <h4>Ahmad Ali</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"Very reliable and professional electrical service. Highly recommended!"</p>
+        <h4>Faika Haider</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Service.in</h3>
+        <p>Your trusted platform for finding professional service providers in your area.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/feedback">Feedback</a></li>
+          <li><a href="/auth/admin-login">Admin</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>Email: info@service.in</p>
+        <p>Phone: +92 3098706815</p>
+        <p>Address: CFD campus faisalabad</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear"></span> Service.in. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Set current year for copyright
+      $('#currentYear').text(new Date().getFullYear());
+      
+      // Mobile menu toggle
+      $('#mobileMenuToggle').click(function() {
+        $('#navLinks').toggleClass('show');
+      });
+      
+      // Handle search form
+      $('#searchForm').submit(function(e) {
+        e.preventDefault();
+        const searchQuery = $('#searchInput').val().trim();
+        if (searchQuery) {
+          window.location.href = `/services?q=${encodeURIComponent(searchQuery)}`;
+        }
+      });
+      
+      // Load services dynamically
+      $.ajax({
+        url: '/api/services',
+        method: 'GET',
+        success: function(response) {
+          if (response.services && response.services.length > 0) {
+            $('#servicesGrid').empty();
+            
+            // Show only first 3 services on homepage
+            const services = response.services.slice(0, 3);
+            
+            services.forEach(function(service) {
+              const categoryLower = service.category.toLowerCase();
+              $('#servicesGrid').append(`
+                <div class="service-card">
+                  <img src="/img/placeholder-${categoryLower}.jpg" alt="${service.category}">
+                  <h3>${service.name}</h3>
+                  <p>${service.description}</p>
+                  <a href="/services/book?id=${service.id}" class="service-btn">Book Now</a>
+                </div>
+              `);
+            });
+          }
+        },
+        error: function(error) {
+          console.error('Error fetching services:', error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

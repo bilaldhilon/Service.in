@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Login | Service.in</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="/">Service.in</a>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+    </nav>
+  </header>
+
+  <!-- Login Form -->
+  <section class="auth-container">
+    <div class="auth-form-container">
+      <h2>Service Provider Login</h2>
+      <div id="alertContainer"></div>
+      <form id="providerLoginForm" class="auth-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-container">
+            <input type="checkbox" name="remember" id="remember">
+            Remember me
+          </label>
+          <a href="/auth/forgot-password" class="forgot-password">Forgot Password?</a>
+        </div>
+        <button type="submit" class="auth-btn" id="loginBtn">Login</button>
+      </form>
+      <div class="auth-links">
+        <p>Don't have an account? <a href="/auth/provider-signup">Sign up as provider</a></p>
+        <p>Are you a customer? <a href="/auth/customer-login">Login here</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; <span id="currentYear"></span> Service.in. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Handle form submission
+      $('#providerLoginForm').submit(function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (!validateForm($(this))) {
+          return;
+        }
+        
+        // Show loading state
+        const loginBtn = $('#loginBtn');
+        loginBtn.text('Logging in...').prop('disabled', true);
+        
+        // Get form data
+        const formData = {
+          email: $('#email').val().trim(),
+          password: $('#password').val(),
+          role: 'provider'
+        };
+        
+        // Send login request
+        $.ajax({
+          url: '/api/auth/login',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(formData),
+          success: function(response) {
+            // Redirect to dashboard
+            window.location.href = '/provider/dashboard';
+          },
+          error: function(xhr) {
+            let errorMessage = 'Login failed. Please try again.';
+            if (xhr.responseJSON && xhr.responseJSON.msg) {
+              errorMessage = xhr.responseJSON.msg;
+            }
+            
+            // Show error message
+            $('#alertContainer').html(`
+              <div class="alert alert-danger">${errorMessage}</div>
+            `);
+            
+            // Reset button
+            loginBtn.text('Login').prop('disabled', false);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

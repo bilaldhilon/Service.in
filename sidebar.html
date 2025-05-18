@@ -1,0 +1,179 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <a href="/" class="sidebar-logo">
+      <i class="bi bi-grid-1x2-fill"></i>
+      <span class="sidebar-logo-text">Service.in</span>
+    </a>
+    <button class="sidebar-toggle">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  
+  <div class="sidebar-user">
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-avatar">
+        <span id="userInitial"></span>
+      </div>
+      <div class="sidebar-user-details">
+        <div class="sidebar-user-name">Loading...</div>
+        <div class="sidebar-user-email">Loading...</div>
+      </div>
+    </div>
+    <span class="sidebar-user-role">Loading...</span>
+  </div>
+  
+  <div class="sidebar-content">
+    <!-- Dashboard Section - For all users -->
+    <div class="sidebar-section" data-role="all">
+      <div class="sidebar-section-header">
+        <span>Dashboard</span>
+        <i class="bi bi-chevron-down sidebar-section-icon"></i>
+      </div>
+      <div class="sidebar-section-content">
+        <div class="sidebar-menu-item">
+          <a href="/customer/dashboard">
+            <i class="bi bi-speedometer2"></i>
+            <span>Overview</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/profile">
+            <i class="bi bi-person"></i>
+            <span>My Profile</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Customer Section -->
+    <div class="sidebar-section" data-role="customer">
+      <div class="sidebar-section-header">
+        <span>Customer</span>
+        <i class="bi bi-chevron-down sidebar-section-icon"></i>
+      </div>
+      <div class="sidebar-section-content">
+        <div class="sidebar-menu-item">
+          <a href="/customer/bookings">
+            <i class="bi bi-calendar-check"></i>
+            <span>My Bookings</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/services">
+            <i class="bi bi-tools"></i>
+            <span>Browse Services</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/feedback">
+            <i class="bi bi-star"></i>
+            <span>Give Feedback</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Provider Section -->
+    <div class="sidebar-section" data-role="provider">
+      <div class="sidebar-section-header">
+        <span>Provider</span>
+        <i class="bi bi-chevron-down sidebar-section-icon"></i>
+      </div>
+      <div class="sidebar-section-content">
+        <div class="sidebar-menu-item">
+          <a href="/provider/services">
+            <i class="bi bi-tools"></i>
+            <span>My Services</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/provider/bookings">
+            <i class="bi bi-calendar-check"></i>
+            <span>Booking Requests</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/provider/earnings">
+            <i class="bi bi-wallet2"></i>
+            <span>Earnings</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Admin Section -->
+    <div class="sidebar-section" data-role="admin">
+      <div class="sidebar-section-header">
+        <span>Administration</span>
+        <i class="bi bi-chevron-down sidebar-section-icon"></i>
+      </div>
+      <div class="sidebar-section-content">
+        <div class="sidebar-menu-item">
+          <a href="/admin/users">
+            <i class="bi bi-people"></i>
+            <span>Users</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/admin/services">
+            <i class="bi bi-tools"></i>
+            <span>Services</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/admin/bookings">
+            <i class="bi bi-calendar-check"></i>
+            <span>Bookings</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/admin/settings">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Support Section - For all users -->
+    <div class="sidebar-section" data-role="all">
+      <div class="sidebar-section-header">
+        <span>Support</span>
+        <i class="bi bi-chevron-down sidebar-section-icon"></i>
+      </div>
+      <div class="sidebar-section-content">
+        <div class="sidebar-menu-item">
+          <a href="/contact">
+            <i class="bi bi-question-circle"></i>
+            <span>Help Center</span>
+          </a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a href="/contact">
+            <i class="bi bi-chat-dots"></i>
+            <span>Contact Support</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="sidebar-footer">
+    <a href="#" id="logoutBtn">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="mobile-header">
+    <button class="sidebar-toggle">
+      <i class="bi bi-list"></i>
+    </button>
+    <h1 class="page-title">Dashboard</h1>
+  </div>
+  
+  <!-- Content will be inserted here -->
+  <div id="content-container"></div>
+</div>
